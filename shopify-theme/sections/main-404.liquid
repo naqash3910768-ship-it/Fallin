@@ -1,7 +1,8 @@
+{%- assign back_home_label = 'general.404.link' | t -%}
 <div class="container empty-state">
   <h1 class="empty-state__title">{{ 'general.404.title' | t }}</h1>
   <p class="empty-state__text">{{ 'general.404.subtext' | t }}</p>
-  {%- render 'button', label: 'general.404.link' | t, url: routes.root_url, size: 'lg' -%}
+  {%- render 'button', label: back_home_label, url: routes.root_url, size: 'lg' -%}
 </div>
 
 {% schema %}

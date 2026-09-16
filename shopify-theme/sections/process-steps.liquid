@@ -3,7 +3,6 @@
     {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, description: section.settings.description, tone: 'light' -%}
 
     <div class="process-steps">
-      {%- assign total = section.blocks.size -%}
       {%- for block in section.blocks -%}
         <div class="process-step" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.08 }}s;" {{ block.shopify_attributes }}>
           <div class="process-step__media">

@@ -2,9 +2,10 @@
   <h1 style="font-size:2rem; font-weight:800; color:var(--color-ink);">{{ 'general.cart.title' | t }}</h1>
 
   {%- if cart.item_count == 0 -%}
+    {%- assign continue_shopping_label = 'cart.general.continue_shopping' | t -%}
     <div class="empty-state">
       <p class="empty-state__text">{{ 'cart.general.empty' | t }}</p>
-      {%- render 'button', label: 'cart.general.continue_shopping' | t, url: routes.all_products_collection_url, size: 'lg' -%}
+      {%- render 'button', label: continue_shopping_label, url: routes.all_products_collection_url, size: 'lg' -%}
     </div>
   {%- else -%}
     {%- form 'cart', cart -%}

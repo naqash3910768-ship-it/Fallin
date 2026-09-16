@@ -10,10 +10,11 @@
         {%- liquid
           assign coll = block.settings.collection
           assign title = block.settings.label | default: coll.title
+          assign category_image = block.settings.image | default: coll.featured_image
         -%}
         <div style="overflow:hidden; border-radius:0.75rem; border:1px solid rgba(0,0,0,0.06);" {{ block.shopify_attributes }}>
           <div class="ratio-16-10">
-            {%- render 'image-or-art', image: block.settings.image | default: coll.featured_image, icon: block.settings.icon, tone: block.settings.tone, label: title -%}
+            {%- render 'image-or-art', image: category_image, icon: block.settings.icon, tone: block.settings.tone, label: title -%}
           </div>
           <div style="padding:1.25rem;">
             <p style="font-weight:700; color:var(--color-ink);">{{ title }}</p>

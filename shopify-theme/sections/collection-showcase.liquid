@@ -10,14 +10,16 @@
           assign row_desc = block.settings.description | default: collection.description | strip_html
           assign row_url = collection.url | default: block.settings.url
           assign row_image = block.settings.image | default: collection.featured_image
+          assign row_label = row_title | append: ' — illustrative artwork'
+          assign row_index_mod = forloop.index0 | modulo: 2
           assign row_class = 'collection-row'
-          if forloop.index0 % 2 == 1
+          if row_index_mod == 1
             assign row_class = row_class | append: ' collection-row--reverse'
           endif
         -%}
         <a href="{{ row_url }}" class="{{ row_class }}" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.05 }}s;" {{ block.shopify_attributes }}>
           <div class="collection-row__media">
-            {%- render 'image-or-art', image: row_image, icon: block.settings.icon, tone: block.settings.tone, label: row_title | append: ' — illustrative artwork' -%}
+            {%- render 'image-or-art', image: row_image, icon: block.settings.icon, tone: block.settings.tone, label: row_label -%}
           </div>
           <div class="collection-row__content">
             <p class="collection-row__index">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</p>

@@ -9,11 +9,12 @@
   assign icon = product.metafields.custom.icon.value | default: 'chair'
   assign tone = product.metafields.custom.tone.value | default: 'sand'
   assign category_label = product.type
+  assign card_label = product.title | append: ' — moulded furniture'
 -%}
 <a href="{{ product.url }}" class="product-card">
   <div class="product-card__media">
     <div class="product-card__media-inner">
-      {%- render 'image-or-art', image: card_image, icon: icon, tone: tone, label: product.title | append: ' — moulded furniture' -%}
+      {%- render 'image-or-art', image: card_image, icon: icon, tone: tone, label: card_label -%}
     </div>
     {%- if category_label != blank -%}
       <span class="product-card__badge">{{ category_label }}</span>
