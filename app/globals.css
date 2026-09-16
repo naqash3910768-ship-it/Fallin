@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #17140f;
+
+  /* Brand palette — derived from the Fello red/yellow mark. Used sparingly
+     per the design brief: mostly neutral/white, dark for depth, red+yellow
+     as accents only. */
+  --color-brand-red: #c31f26;
+  --color-brand-red-dark: #8f1418;
+  --color-brand-yellow: #f2b705;
+  --color-brand-ink: #171310;
+  --color-brand-charcoal: #221d18;
+  --color-brand-paper: #ffffff;
+  --color-brand-sand: #f5f2ec;
+  --color-brand-sand-dark: #ece6db;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-brand-red: var(--color-brand-red);
+  --color-brand-red-dark: var(--color-brand-red-dark);
+  --color-brand-yellow: var(--color-brand-yellow);
+  --color-brand-ink: var(--color-brand-ink);
+  --color-brand-charcoal: var(--color-brand-charcoal);
+  --color-brand-paper: var(--color-brand-paper);
+  --color-brand-sand: var(--color-brand-sand);
+  --color-brand-sand-dark: var(--color-brand-sand-dark);
+
+  --font-sans: var(--font-jakarta);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+}
+
+::selection {
+  background: var(--color-brand-yellow);
+  color: var(--color-brand-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-red);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
