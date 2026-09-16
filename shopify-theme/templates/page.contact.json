@@ -1,0 +1,18 @@
+{
+  "sections": {
+    "header": {
+      "type": "page-header",
+      "settings": {
+        "breadcrumb_label": "Contact",
+        "eyebrow": "",
+        "title": "Let's Talk",
+        "text": "Whether you're a homeowner, a retailer or an institutional buyer, we're happy to help.",
+        "show_image": false
+      }
+    },
+    "form": {
+      "type": "contact-info-form"
+    }
+  },
+  "order": ["header", "form"]
+}

@@ -1,0 +1,34 @@
+{%- comment -%}
+  Accepts:
+    product — product object (required)
+{%- endcomment -%}
+{%- liquid
+  assign card_image = product.featured_image
+  assign item_number = product.metafields.custom.item_number.value | default: product.selected_or_first_available_variant.sku
+  assign tagline = product.metafields.custom.tagline.value | default: product.description | strip_html | truncatewords: 18
+  assign icon = product.metafields.custom.icon.value | default: 'chair'
+  assign tone = product.metafields.custom.tone.value | default: 'sand'
+  assign category_label = product.type
+-%}
+<a href="{{ product.url }}" class="product-card">
+  <div class="product-card__media">
+    <div class="product-card__media-inner">
+      {%- render 'image-or-art', image: card_image, icon: icon, tone: tone, label: product.title | append: ' — moulded furniture' -%}
+    </div>
+    {%- if category_label != blank -%}
+      <span class="product-card__badge">{{ category_label }}</span>
+    {%- endif -%}
+  </div>
+  <div class="product-card__body">
+    <div class="product-card__row">
+      <h3 class="product-card__name">{{ product.title }}</h3>
+      {%- if item_number != blank -%}<span class="product-card__sku">{{ item_number }}</span>{%- endif -%}
+    </div>
+    {%- if tagline != blank -%}<p class="product-card__tagline">{{ tagline }}</p>{%- endif -%}
+    {%- render 'color-swatches', product: product, size: 'sm' -%}
+    <span class="product-card__cta">
+      {{ 'products.product.view_product' | t }}
+      {%- render 'icon-arrow' -%}
+    </span>
+  </div>
+</a>

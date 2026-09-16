@@ -1,0 +1,62 @@
+<div class="container" style="padding-block:3rem;">
+  {%- render 'json-ld-article', article: article -%}
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><span aria-hidden="true">/</span><a href="{{ blog.url }}">{{ blog.title }}</a></li>
+      <li><span aria-hidden="true">/</span><span class="breadcrumbs__current" aria-current="page">{{ article.title }}</span></li>
+    </ol>
+  </nav>
+
+  <article class="article">
+    <p class="article__category">{{ article.tags.first | default: 'Journal' }}</p>
+    <h1 class="article__title">{{ article.title }}</h1>
+    <p class="article__meta">
+      {{ article.published_at | date: '%B %d, %Y' }}
+      {%- if article.user.name %} &middot; {{ article.user.name }}{% endif -%}
+    </p>
+
+    <div class="article__media">
+      {%- render 'image-or-art', image: article.image, icon: 'finish', tone: 'sand', label: article.title, loading: 'eager' -%}
+    </div>
+
+    <div class="article__body">
+      {{ article.content }}
+    </div>
+
+    {%- if section.settings.show_comments and blog.comments_enabled? -%}
+      <div style="margin-top:3rem; border-top:1px solid rgba(0,0,0,0.06); padding-top:2rem;">
+        {%- form 'new_comment', article -%}
+          {%- if form.posted_successfully? -%}
+            <p class="form-success__title">Thanks for your comment!</p>
+          {%- endif -%}
+          <div class="form-row">
+            <div class="form-field">
+              <label for="CommentAuthor">Name</label>
+              <input type="text" id="CommentAuthor" name="comment[author]" required>
+            </div>
+            <div class="form-field">
+              <label for="CommentEmail">Email</label>
+              <input type="email" id="CommentEmail" name="comment[email]" required>
+            </div>
+          </div>
+          <div class="form-field" style="margin-top:1.25rem;">
+            <label for="CommentBody">Comment</label>
+            <textarea id="CommentBody" name="comment[body]" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg" style="margin-top:1.25rem;">Post Comment</button>
+        {%- endform -%}
+      </div>
+    {%- endif -%}
+  </article>
+</div>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "checkbox", "id": "show_comments", "label": "Show comment form", "default": false }
+  ]
+}
+{% endschema %}

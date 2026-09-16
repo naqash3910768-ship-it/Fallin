@@ -1,0 +1,46 @@
+<section class="section section--bordered section--sand">
+  <div class="container">
+    {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+    <div class="timeline">
+      {%- for block in section.blocks -%}
+        <div class="timeline__item" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.06 }}s;" {{ block.shopify_attributes }}>
+          <p class="timeline__year">{{ block.settings.year }}</p>
+          <p class="timeline__title">{{ block.settings.title }}</p>
+          <p class="timeline__body">{{ block.settings.body }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Timeline",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "From One Mould to a Full Range" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Timeline item",
+      "settings": [
+        { "type": "text", "id": "year", "label": "Year / label", "default": "1993" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Milestone title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "item", "settings": { "year": "1993", "title": "Polycraft Industries founded", "body": "Polycraft Industries was established in 1993 to manufacture large-size injection moulded articles." } },
+      { "type": "item", "settings": { "year": "Early years", "title": "One mould, one machine", "body": "The company began with one chair mould and a 1000-ton injection moulding machine imported from Taiwan." } },
+      { "type": "item", "settings": { "year": "Ongoing", "title": "Material philosophy", "body": "Fello furniture is made using 100% virgin furniture-grade polypropylene resin." } },
+      { "type": "item", "settings": { "year": "Today", "title": "A broader mould range", "body": "Today Polycraft Industries operates more than ten chair and table moulds, supported by several large and medium tonnage injection moulding machines." } }
+    ]
+  },
+  "presets": [
+    { "name": "Timeline" }
+  ]
+}
+{% endschema %}

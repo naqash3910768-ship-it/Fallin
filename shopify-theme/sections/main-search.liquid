@@ -1,0 +1,57 @@
+<div class="container" style="padding-block:3rem;">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><span aria-hidden="true">/</span><span class="breadcrumbs__current" aria-current="page">Search</span></li>
+    </ol>
+  </nav>
+
+  <h1 style="margin-top:1rem; font-size:2rem; font-weight:800; color:var(--color-ink);">Search</h1>
+
+  <form action="{{ routes.search_url }}" method="get" role="search" class="product-filter__search" style="margin-top:1.5rem; width:100%; max-width:28rem;">
+    <input type="hidden" name="type" value="product">
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"></circle><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+    <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
+  </form>
+
+  {%- if search.performed -%}
+    <p class="product-filter__count">
+      {%- if search.results_count > 0 -%}
+        {{ 'general.search.results_count' | t: count: search.results_count, terms: search.terms }}
+      {%- else -%}
+        {{ 'general.search.no_results' | t: terms: search.terms }}
+      {%- endif -%}
+    </p>
+
+    {%- paginate search.results by 24 -%}
+      <div class="product-grid" style="margin-top:1.5rem;">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {%- render 'product-card', product: item -%}
+          {%- else -%}
+            <a href="{{ item.url }}" class="blog-card">
+              <div class="blog-card__body">
+                <h3 class="blog-card__title">{{ item.title }}</h3>
+                <p class="blog-card__excerpt">{{ item.content | strip_html | truncatewords: 20 }}</p>
+              </div>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination" style="margin-top:2.5rem; display:flex; justify-content:center; gap:0.5rem;">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn--ghost btn--md">{{ 'general.pagination.previous' | t }}</a>{%- endif -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn--ghost btn--md">{{ 'general.pagination.next' | t }}</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Search results",
+  "settings": []
+}
+{% endschema %}

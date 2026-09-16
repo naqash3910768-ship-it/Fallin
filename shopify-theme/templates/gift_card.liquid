@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{{ 'gift_cards.issued.subject' | t: shop: shop.name }}</title>
+  <meta name="robots" content="noindex">
+  {{ 'base.css' | asset_url | stylesheet_tag }}
+  <style>
+    body { background: var(--color-sand, #f5f2ec); font-family: sans-serif; }
+    .gift-card-wrap { max-width: 32rem; margin: 4rem auto; padding: 2.5rem; background: #fff; border-radius: 1rem; text-align: center; }
+    .gift-card-code { margin-top: 1.5rem; font-size: 1.5rem; font-weight: 700; letter-spacing: 0.05em; border: 2px dashed rgba(0,0,0,0.15); border-radius: 0.75rem; padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div class="gift-card-wrap">
+    <p style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.2em; color:var(--color-red,#c31f26);">{{ shop.name }}</p>
+    <h1 style="margin-top:0.75rem; font-size:1.75rem; font-weight:800;">{{ gift_card.initial_value | money }} Gift Card</h1>
+    <p class="gift-card-code">{{ gift_card.code | format_code }}</p>
+    {%- if gift_card.enabled and gift_card.expired == false -%}
+      <p style="margin-top:1rem; font-size:0.875rem; color:#737373;">Use this code at checkout.</p>
+    {%- else -%}
+      <p style="margin-top:1rem; font-size:0.875rem; color:#c31f26;">This gift card is no longer active.</p>
+    {%- endif -%}
+    <a href="{{ shop.url }}" style="display:inline-block; margin-top:1.5rem; color:var(--color-red,#c31f26); font-weight:600;">Continue to {{ shop.name }}</a>
+  </div>
+</body>
+</html>

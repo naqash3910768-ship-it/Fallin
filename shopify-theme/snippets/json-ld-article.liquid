@@ -1,0 +1,13 @@
+{%- comment -%} Accepts: article {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": {{ article.title | json }},
+  "description": {{ article.excerpt_or_content | strip_html | truncatewords: 30 | json }},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%d' | json }},
+  "author": { "@type": "Organization", "name": {{ shop.name | json }} },
+  "publisher": { "@type": "Organization", "name": {{ shop.name | json }} },
+  "mainEntityOfPage": {{ shop.url | append: article.url | json }}
+}
+</script>

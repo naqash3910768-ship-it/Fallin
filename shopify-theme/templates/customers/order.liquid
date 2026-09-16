@@ -1,0 +1,30 @@
+<div class="container" style="padding-block:4rem;">
+  <a href="{{ routes.account_url }}" style="font-size:0.875rem; color:#737373;">&larr; Back to account</a>
+  <h1 style="margin-top:1rem; font-size:2rem; font-weight:800; color:var(--color-ink);">Order {{ order.name }}</h1>
+  <p style="margin-top:0.5rem; color:var(--color-body-text);">Placed on {{ order.created_at | date: '%B %d, %Y' }}</p>
+
+  <table class="cart-table" style="margin-top:2rem;">
+    <thead>
+      <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for line_item in order.line_items -%}
+        <tr>
+          <td>{{ line_item.title }}</td>
+          <td>{{ line_item.original_price | money }}</td>
+          <td>{{ line_item.quantity }}</td>
+          <td>{{ line_item.final_line_price | money }}</td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+
+  <div class="cart-summary">
+    <p class="cart-summary__subtotal">Total: {{ order.total_price | money }}</p>
+  </div>
+</div>

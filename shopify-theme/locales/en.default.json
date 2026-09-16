@@ -1,0 +1,83 @@
+{
+  "general": {
+    "search": {
+      "search": "Search",
+      "placeholder": "Search products...",
+      "no_results": "No results found for \"{{ terms }}\"",
+      "results_count": "Showing {{ count }} results for \"{{ terms }}\""
+    },
+    "cart": {
+      "view_cart": "View cart",
+      "title": "Your Cart"
+    },
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you're looking for doesn't exist or has moved.",
+      "link": "Back to Home"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "accessibility": {
+      "refresh_page": "Choosing a selection results in a full page refresh."
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "item_number": "Item #",
+      "available_colours": "Available Colours",
+      "specifications": "Specifications",
+      "view_product": "View Product",
+      "related_heading": "You Might Also Like"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "empty": "Your cart is currently empty.",
+      "continue_shopping": "Continue Shopping",
+      "checkout": "Checkout",
+      "subtotal": "Subtotal",
+      "remove": "Remove",
+      "update": "Update Cart"
+    }
+  },
+  "blogs": {
+    "article": {
+      "read_more": "Read More",
+      "back_to_blog": "Back to Blog"
+    }
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "subject": "Subject",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success_title": "Message sent",
+      "success_body": "Thank you for reaching out — we'll get back to you shortly.",
+      "send_another": "Send Another Message",
+      "error": "Something went wrong sending your message. Please try again or email us directly.",
+      "error_name": "Please enter your name.",
+      "error_email": "Please enter a valid email address.",
+      "error_message": "Please add a short message."
+    }
+  },
+  "newsletter": {
+    "email_placeholder": "Your email address",
+    "subscribe": "Subscribe"
+  },
+  "gift_cards": {
+    "issued": {
+      "subject": "Here's your gift card for {{ shop }}!"
+    }
+  }
+}

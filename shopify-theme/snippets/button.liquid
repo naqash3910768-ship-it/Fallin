@@ -1,0 +1,34 @@
+{%- comment -%}
+  Accepts:
+    label     — string (required)
+    url       — string (optional; renders a <button> if absent)
+    style     — primary | secondary | ghost | light (default: primary)
+    size      — md | lg (default: md)
+    with_arrow — boolean (default: true)
+    class     — extra classes
+    type      — button type when no url (default: button)
+    external  — boolean
+{%- endcomment -%}
+{%- liquid
+  assign style = style | default: 'primary'
+  assign size = size | default: 'md'
+  assign show_arrow = true
+  if with_arrow == false
+    assign show_arrow = false
+  endif
+  assign classes = 'btn btn--' | append: style | append: ' btn--' | append: size
+  if class
+    assign classes = classes | append: ' ' | append: class
+  endif
+-%}
+{%- if url -%}
+  <a href="{{ url }}" class="{{ classes }}"{% if external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+    <span>{{ label }}</span>
+    {%- if show_arrow -%}{%- render 'icon-arrow', class: 'btn-arrow' -%}{%- endif -%}
+  </a>
+{%- else -%}
+  <button type="{{ type | default: 'button' }}" class="{{ classes }}"{% if disabled %} disabled{% endif %}>
+    <span>{{ label }}</span>
+    {%- if show_arrow -%}{%- render 'icon-arrow', class: 'btn-arrow' -%}{%- endif -%}
+  </button>
+{%- endif -%}

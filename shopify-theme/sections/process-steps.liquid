@@ -1,0 +1,71 @@
+<section class="section section--ink">
+  <div class="container">
+    {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title, description: section.settings.description, tone: 'light' -%}
+
+    <div class="process-steps">
+      {%- assign total = section.blocks.size -%}
+      {%- for block in section.blocks -%}
+        <div class="process-step" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.08 }}s;" {{ block.shopify_attributes }}>
+          <div class="process-step__media">
+            {%- render 'image-or-art', image: block.settings.image, icon: block.settings.icon, tone: 'charcoal', label: block.settings.title -%}
+          </div>
+          <p class="process-step__eyebrow">Step {{ forloop.index }}</p>
+          <p class="process-step__title">{{ block.settings.title }}</p>
+          <p class="process-step__body">{{ block.settings.body }}</p>
+          {%- unless forloop.last -%}
+            <span class="process-step__arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 12h16M14 6l6 6-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            </span>
+          {%- endunless -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Process steps",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "How It's Made" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "From Polymer to Product" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "A straightforward manufacturing path Polycraft Industries has refined since 1993." }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Step title" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Describe this step." },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Placeholder icon",
+          "default": "resin",
+          "options": [
+            { "value": "resin", "label": "Resin" },
+            { "value": "mould", "label": "Mould" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "finish", "label": "Finish" },
+            { "value": "stack", "label": "Stack" },
+            { "value": "factory", "label": "Factory" }
+          ]
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "step", "settings": { "title": "Raw Material", "body": "100% virgin furniture-grade polypropylene resin, sourced ahead of every production run.", "icon": "resin" } },
+      { "type": "step", "settings": { "title": "Injection Moulding", "body": "Resin is shaped under heat and pressure across Polycraft's chair and table moulds.", "icon": "mould" } },
+      { "type": "step", "settings": { "title": "Quality Control", "body": "Each piece is checked for finish and structural integrity before approval.", "icon": "quality" } },
+      { "type": "step", "settings": { "title": "Finished Furniture", "body": "Ready to stack, ship and use — in homes, offices and institutions across Pakistan.", "icon": "stack" } }
+    ]
+  },
+  "presets": [
+    { "name": "Process steps" }
+  ]
+}
+{% endschema %}

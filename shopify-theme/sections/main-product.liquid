@@ -1,0 +1,177 @@
+{%- liquid
+  assign item_number = product.metafields.custom.item_number.value | default: product.selected_or_first_available_variant.sku
+  assign tagline = product.metafields.custom.tagline.value
+  assign icon = product.metafields.custom.icon.value | default: 'chair'
+  assign tone = product.metafields.custom.tone.value | default: 'sand'
+  assign specs_raw = product.metafields.custom.specifications.value
+  assign spec_source = product.metafields.custom.spec_source.value
+  assign color_source = product.metafields.custom.color_source.value
+  assign has_color_option = false
+  for option in product.options_with_values
+    if option.name == 'Color' or option.name == 'Colour'
+      assign has_color_option = true
+    endif
+  endfor
+
+-%}
+
+<div class="container" style="padding-block:3rem;">
+  {%- render 'json-ld-product', product: product -%}
+
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><span aria-hidden="true">/</span><a href="{{ routes.all_products_collection_url }}">Products</a></li>
+      <li><span aria-hidden="true">/</span><span class="breadcrumbs__current" aria-current="page">{{ product.title }}</span></li>
+    </ol>
+  </nav>
+
+  <div class="product-detail" style="margin-top:2rem;">
+    <div data-product-gallery>
+      <div class="product-gallery__main ratio-square" data-gallery-main>
+        {%- if product.media.size > 0 -%}
+          {%- render 'image-or-art', image: product.featured_media.preview_image, icon: icon, tone: tone, label: product.title, loading: 'eager' -%}
+        {%- else -%}
+          {%- render 'icon-art', icon: icon, tone: tone, label: product.title -%}
+        {%- endif -%}
+      </div>
+
+      {%- if product.media.size > 1 -%}
+        <div class="product-gallery__thumbs">
+          {%- for media in product.media limit: 6 -%}
+            {%- capture media_markup -%}
+              {%- render 'image-or-art', image: media.preview_image, icon: icon, tone: tone, label: product.title -%}
+            {%- endcapture -%}
+            <button
+              type="button"
+              class="product-gallery__thumb{% if forloop.first %} is-active{% endif %}"
+              data-gallery-thumb
+              data-gallery-source="{{ media_markup | escape }}"
+              aria-label="Show image {{ forloop.index }}"
+            >
+              {%- render 'image-or-art', image: media.preview_image, icon: icon, tone: tone, label: product.title, pattern: false -%}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- elsif product.media.size == 0 -%}
+        <div class="product-gallery__thumbs">
+          {%- capture view1 -%}{%- render 'icon-art', icon: icon, tone: 'sand', label: product.title -%}{%- endcapture -%}
+          {%- capture view2 -%}{%- render 'icon-art', icon: icon, tone: 'ink', label: product.title -%}{%- endcapture -%}
+          {%- capture view3 -%}{%- render 'icon-art', icon: icon, tone: 'yellow', label: product.title -%}{%- endcapture -%}
+          <button type="button" class="product-gallery__thumb is-active" data-gallery-thumb data-gallery-source="{{ view1 | escape }}" aria-label="Front view">{%- render 'icon-art', icon: icon, tone: 'sand', label: product.title, pattern: false -%}</button>
+          <button type="button" class="product-gallery__thumb" data-gallery-thumb data-gallery-source="{{ view2 | escape }}" aria-label="Detail view">{%- render 'icon-art', icon: icon, tone: 'ink', label: product.title, pattern: false -%}</button>
+          <button type="button" class="product-gallery__thumb" data-gallery-thumb data-gallery-source="{{ view3 | escape }}" aria-label="Lifestyle view">{%- render 'icon-art', icon: icon, tone: 'yellow', label: product.title, pattern: false -%}</button>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div>
+      {%- if product.type != blank -%}<span class="product-detail__category">{{ product.type }}</span>{%- endif -%}
+      <h1 class="product-detail__title">{{ product.title }}</h1>
+      {%- if item_number != blank -%}<p class="product-detail__sku">{{ 'products.product.item_number' | t }} {{ item_number }}</p>{%- endif -%}
+      {%- if tagline != blank -%}<p class="product-detail__tagline">{{ tagline }}</p>{%- endif -%}
+
+      {%- if product.description != blank -%}
+        <div class="product-detail__block product-detail__desc">
+          {{ product.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if has_color_option -%}
+        <div class="product-detail__block">
+          <p class="product-detail__label">{{ 'products.product.available_colours' | t }}</p>
+          <div style="margin-top:0.75rem;">
+            {%- render 'color-swatches', product: product, size: 'md', show_names: true -%}
+          </div>
+          {%- if color_source != blank -%}<p class="product-detail__source">{{ color_source }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if specs_raw != blank -%}
+        <div class="product-detail__block">
+          <p class="product-detail__label">{{ 'products.product.specifications' | t }}</p>
+          <dl class="spec-list">
+            {%- assign spec_lines = specs_raw | newline_to_br | split: '<br />' -%}
+            {%- for line in spec_lines -%}
+              {%- assign line = line | strip -%}
+              {%- if line contains ':' -%}
+                {%- assign spec_label = line | split: ':' | first | strip -%}
+                {%- assign spec_value = line | remove_first: spec_label | remove_first: ':' | strip -%}
+                <div class="spec-list__row">
+                  <dt class="spec-list__label">{{ spec_label }}</dt>
+                  <dd class="spec-list__value">{{ spec_value }}</dd>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </dl>
+          {%- if spec_source != blank -%}<p class="product-detail__source">{{ spec_source }}</p>{%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- form 'product', product -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" data-product-variant-id>
+
+        {%- if product.has_only_default_variant == false -%}
+          <div class="product-detail__block">
+            {%- for option in product.options_with_values -%}
+              <div class="form-field" style="margin-top: {% unless forloop.first %}1rem{% else %}0{% endunless %};">
+                <label for="ProductOption-{{ option.position }}">{{ option.name }}</label>
+                <select id="ProductOption-{{ option.position }}" name="options[{{ option.name | escape }}]">
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}"{% if value == option.selected_value %} selected{% endif %}>{{ value }}</option>
+                  {%- endfor -%}
+                </select>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product-detail__actions">
+          <div class="qty-selector" data-quantity-selector>
+            <button type="button" data-quantity-step="-1" aria-label="Decrease quantity">&minus;</button>
+            <input type="number" name="quantity" value="1" min="1" aria-label="{{ 'products.product.quantity' | t }}">
+            <button type="button" data-quantity-step="1" aria-label="Increase quantity">&plus;</button>
+          </div>
+          <button type="submit" class="btn btn--primary btn--lg" {% unless product.available %}disabled{% endunless %}>
+            <span>{% if product.available %}{{ 'products.product.add_to_cart' | t }}{% else %}{{ 'products.product.sold_out' | t }}{% endif %}</span>
+          </button>
+        </div>
+      {%- endform -%}
+
+      <div class="product-detail__actions">
+        {%- render 'button', label: 'Request Information', url: section.settings.contact_url, size: 'lg', style: 'secondary' -%}
+        {%- render 'button', label: 'Download Brochure', url: section.settings.brochure_url, size: 'lg', style: 'ghost' -%}
+      </div>
+    </div>
+  </div>
+
+  {%- liquid
+    assign related_count = 0
+    capture related_markup
+      for related in collections.all.products
+        if related.type == product.type and related.id != product.id and related_count < 3
+          render 'product-card', product: related
+          assign related_count = related_count | plus: 1
+        endif
+      endfor
+    endcapture
+  -%}
+  {%- if related_markup != blank -%}
+    <div class="related-products">
+      <h2 class="related-products__title">{{ 'products.product.related_heading' | t }}</h2>
+      <div class="product-grid">
+        {{ related_markup }}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Product information",
+  "settings": [
+    { "type": "url", "id": "contact_url", "label": "\"Request information\" link", "default": "/pages/contact" },
+    { "type": "url", "id": "brochure_url", "label": "\"Download brochure\" link", "default": "/pages/brochure" }
+  ]
+}
+{% endschema %}

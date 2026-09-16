@@ -1,0 +1,28 @@
+{%- comment -%}
+  Renders a merchant-uploaded image (cover-fit) when present, otherwise falls
+  back to the illustrative icon-art placeholder. This is the bridge that lets
+  every visual slot in the theme be replaced from the Shopify Admin.
+
+  Accepts:
+    image   — image object (optional)
+    icon    — icon-art icon name (fallback)
+    tone    — icon-art tone (fallback)
+    label   — alt text
+    pattern — boolean, passed through to icon-art
+    sizes   — sizes attribute for responsive image (optional)
+{%- endcomment -%}
+{%- if image -%}
+  <div class="media-fill">
+    <img
+      src="{{ image | image_url: width: 1600 }}"
+      srcset="{{ image | image_url: width: 400 }} 400w, {{ image | image_url: width: 800 }} 800w, {{ image | image_url: width: 1200 }} 1200w, {{ image | image_url: width: 1600 }} 1600w"
+      sizes="{{ sizes | default: '(min-width: 1024px) 50vw, 100vw' }}"
+      alt="{{ image.alt | default: label | escape }}"
+      width="{{ image.width }}"
+      height="{{ image.height }}"
+      loading="{{ loading | default: 'lazy' }}"
+    >
+  </div>
+{%- else -%}
+  {%- render 'icon-art', icon: icon, tone: tone, label: label, pattern: pattern -%}
+{%- endif -%}

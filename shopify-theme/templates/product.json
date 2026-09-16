@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "settings": {
+        "contact_url": "/pages/contact",
+        "brochure_url": "/pages/brochure"
+      }
+    }
+  },
+  "order": ["main"]
+}

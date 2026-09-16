@@ -1,0 +1,20 @@
+<div class="container" style="padding-block:3rem;">
+  <h1 style="font-size:2rem; font-weight:800; color:var(--color-ink);">Collections</h1>
+  <div class="grid" style="margin-top:2rem; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));">
+    {%- for collection in collections -%}
+      <a href="{{ collection.url }}" style="overflow:hidden; border-radius:0.75rem; border:1px solid rgba(0,0,0,0.06); display:block;">
+        <div class="ratio-16-10">
+          {%- render 'image-or-art', image: collection.featured_image, icon: 'chair', tone: 'sand', label: collection.title -%}
+        </div>
+        <div style="padding:1.25rem;">
+          <p style="font-weight:700; color:var(--color-ink);">{{ collection.title }}</p>
+          <p style="margin-top:0.25rem; font-size:0.875rem; color:#737373;">{{ collection.products_count }} products</p>
+        </div>
+      </a>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Collections list", "settings": [] }
+{% endschema %}

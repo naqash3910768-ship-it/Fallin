@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "header": {
+      "type": "page-header",
+      "settings": {
+        "breadcrumb_label": "Quality",
+        "eyebrow": "Our Standard",
+        "title": "Quality You Can Rely On",
+        "text": "Polycraft Industries was established in 1993 to manufacture large-size injection moulded articles.",
+        "icon": "quality",
+        "tone": "charcoal"
+      }
+    },
+    "pillars": {
+      "type": "pillars-grid",
+      "settings": {
+        "eyebrow": "Four Pillars",
+        "title": "What Quality Means at Fello"
+      }
+    },
+    "process": {
+      "type": "process-steps",
+      "settings": {
+        "eyebrow": "How It's Made",
+        "title": "From Polymer to Product",
+        "description": "A straightforward manufacturing path Polycraft Industries has refined since 1993."
+      }
+    }
+  },
+  "order": ["header", "pillars", "process"]
+}

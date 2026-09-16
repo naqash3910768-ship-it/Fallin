@@ -1,0 +1,178 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Fello",
+    "theme_version": "1.0.0",
+    "theme_author": "Fello Moulded Furniture",
+    "theme_documentation_url": "",
+    "theme_support_url": ""
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand palette"
+      },
+      {
+        "type": "color",
+        "id": "color_ink",
+        "label": "Ink (primary text / dark sections)",
+        "default": "#171310"
+      },
+      {
+        "type": "color",
+        "id": "color_charcoal",
+        "label": "Charcoal (secondary dark)",
+        "default": "#221d18"
+      },
+      {
+        "type": "color",
+        "id": "color_red",
+        "label": "Brand red",
+        "default": "#c31f26"
+      },
+      {
+        "type": "color",
+        "id": "color_red_dark",
+        "label": "Brand red (hover)",
+        "default": "#8f1418"
+      },
+      {
+        "type": "color",
+        "id": "color_yellow",
+        "label": "Brand yellow (accent)",
+        "default": "#f2b705"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Paper (background)",
+        "default": "#ffffff"
+      },
+      {
+        "type": "color",
+        "id": "color_sand",
+        "label": "Sand (alternate background)",
+        "default": "#f5f2ec"
+      },
+      {
+        "type": "color",
+        "id": "color_sand_dark",
+        "label": "Sand dark",
+        "default": "#ece6db"
+      },
+      {
+        "type": "color",
+        "id": "color_body_text",
+        "label": "Body text",
+        "default": "#57534e"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "assistant_n7"
+      },
+      {
+        "type": "header",
+        "content": "Body"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "assistant_n4"
+      },
+      {
+        "type": "checkbox",
+        "id": "use_custom_font",
+        "label": "Use Plus Jakarta Sans (loaded from Google Fonts)",
+        "default": true,
+        "info": "Matches the original Fello design. Disable to use the font pickers above instead."
+      }
+    ]
+  },
+  {
+    "name": "Layout",
+    "settings": [
+      {
+        "type": "range",
+        "id": "page_width",
+        "label": "Page width",
+        "min": 1100,
+        "max": 1600,
+        "step": 20,
+        "unit": "px",
+        "default": 1320
+      }
+    ]
+  },
+  {
+    "name": "Buttons",
+    "settings": [
+      {
+        "type": "range",
+        "id": "button_radius",
+        "label": "Corner radius",
+        "min": 0,
+        "max": 24,
+        "step": 1,
+        "unit": "px",
+        "default": 6
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enable_reveal_animations",
+        "label": "Enable scroll reveal animations",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook_link",
+        "label": "Facebook",
+        "default": "https://www.facebook.com/fellomouldedfurniture/"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "default": "https://www.instagram.com/fello.pk/"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  }
+]

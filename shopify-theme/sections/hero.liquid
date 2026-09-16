@@ -1,0 +1,131 @@
+<section class="hero">
+  <div class="container hero__grid">
+    <div data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<p class="hero__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="hero__title">{{ section.settings.title }}</h1>
+      {%- if section.settings.text != blank -%}<p class="hero__text">{{ section.settings.text }}</p>{%- endif -%}
+      <div class="hero__actions">
+        {%- if section.settings.button_label != blank -%}
+          {%- render 'button', label: section.settings.button_label, url: section.settings.button_url, size: 'lg' -%}
+        {%- endif -%}
+        {%- if section.settings.button_2_label != blank -%}
+          {%- render 'button', label: section.settings.button_2_label, url: section.settings.button_2_url, size: 'lg', style: 'ghost' -%}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="hero__media" data-reveal style="--reveal-delay:0.15s;">
+      <div class="hero__media-frame">
+        {%- render 'image-or-art', image: section.settings.image, icon: section.settings.icon, tone: section.settings.tone, label: 'Fello moulded chair — illustrative artwork', loading: 'eager' -%}
+      </div>
+      {%- if section.settings.badge_number != blank -%}
+        <div class="hero__badge">
+          <p class="hero__badge-num">{{ section.settings.badge_number }}</p>
+          <p class="hero__badge-label">{{ section.settings.badge_label }}</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Fello Moulded Furniture"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Furniture Built for Everyday Life."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Body text",
+      "default": "Premium moulded furniture designed with quality, durability and modern living in mind — manufactured in Pakistan by Polycraft Industries since 1993."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Primary button label",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "button_2_label",
+      "label": "Secondary button label",
+      "default": "Download Brochure"
+    },
+    {
+      "type": "url",
+      "id": "button_2_url",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Placeholder icon (used if no image is set)",
+      "default": "chair",
+      "options": [
+        { "value": "chair", "label": "Chair" },
+        { "value": "armchair", "label": "Armchair" },
+        { "value": "stool", "label": "Stool" },
+        { "value": "table", "label": "Table" },
+        { "value": "kids-chair", "label": "Kids chair" },
+        { "value": "factory", "label": "Factory" },
+        { "value": "resin", "label": "Resin" },
+        { "value": "mould", "label": "Mould" },
+        { "value": "quality", "label": "Quality" },
+        { "value": "finish", "label": "Finish" },
+        { "value": "stack", "label": "Stack" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Placeholder tone",
+      "default": "sand",
+      "options": [
+        { "value": "sand", "label": "Sand" },
+        { "value": "ink", "label": "Ink" },
+        { "value": "red", "label": "Red" },
+        { "value": "yellow", "label": "Yellow" },
+        { "value": "charcoal", "label": "Charcoal" }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "badge_number",
+      "label": "Floating badge — number",
+      "default": "1993"
+    },
+    {
+      "type": "text",
+      "id": "badge_label",
+      "label": "Floating badge — label",
+      "default": "Manufacturing since"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}

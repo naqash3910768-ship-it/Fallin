@@ -1,0 +1,22 @@
+<div class="container" style="padding-block:4rem; max-width:28rem; margin-inline:auto;">
+  <h1 style="font-size:2rem; font-weight:800; color:var(--color-ink); text-align:center;">Activate Account</h1>
+  <p style="margin-top:0.5rem; text-align:center; color:var(--color-body-text);">Create a password to activate your account.</p>
+
+  {%- form 'activate_customer_password' -%}
+    {%- if form.errors -%}
+      <p class="form-error" style="margin-top:1rem;">{{ form.errors | default_errors }}</p>
+    {%- endif -%}
+    <div class="form-field" style="margin-top:1.5rem;">
+      <label for="ActivatePassword">Password</label>
+      <input type="password" id="ActivatePassword" name="customer[password]" autocomplete="new-password" required>
+    </div>
+    <div class="form-field" style="margin-top:1.25rem;">
+      <label for="ActivatePasswordConfirm">Confirm password</label>
+      <input type="password" id="ActivatePasswordConfirm" name="customer[password_confirmation]" autocomplete="new-password" required>
+    </div>
+    <div style="margin-top:1.5rem; display:flex; gap:0.75rem;">
+      <button type="submit" class="btn btn--primary btn--lg">Activate Account</button>
+      <button type="submit" name="decline" class="btn btn--ghost btn--lg">Decline Invitation</button>
+    </div>
+  {%- endform -%}
+</div>

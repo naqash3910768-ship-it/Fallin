@@ -1,0 +1,47 @@
+<section class="section section--sand">
+  <div class="container">
+    <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start; justify-content:space-between;" class="featured-products__head">
+      {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+      {%- if section.settings.view_all_label != blank and section.settings.blog != blank -%}
+        {%- render 'button', label: section.settings.view_all_label, url: section.settings.blog.url, style: 'ghost' -%}
+      {%- endif -%}
+    </div>
+
+    <div class="blog-grid blog-grid--3">
+      {%- liquid
+        assign articles = section.settings.blog.articles
+        assign limit = section.settings.posts_to_show
+      -%}
+      {%- for article in articles limit: limit -%}
+        <a href="{{ article.url }}" class="blog-card" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.06 }}s;">
+          <div class="blog-card__media">
+            {%- render 'image-or-art', image: article.image, icon: 'finish', tone: 'sand', label: article.title -%}
+          </div>
+          <div class="blog-card__body">
+            <p class="blog-card__category">{{ article.tags.first | default: 'Journal' }}</p>
+            <h3 class="blog-card__title">{{ article.title }}</h3>
+            <p class="blog-card__excerpt">{{ article.excerpt_or_content | strip_html | truncatewords: 20 }}</p>
+          </div>
+        </a>
+      {%- else -%}
+        <div class="product-empty">Select a blog above to show recent posts here.</div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blog posts",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "From the Journal" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Furniture, Design & Quality" },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "posts_to_show", "label": "Posts to show", "min": 3, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "view_all_label", "label": "\"View all\" button label", "default": "Visit the Blog" }
+  ],
+  "presets": [
+    { "name": "Blog posts" }
+  ]
+}
+{% endschema %}

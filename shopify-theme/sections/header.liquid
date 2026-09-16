@@ -1,0 +1,102 @@
+<header class="site-header" data-site-header>
+  <div class="container site-header__inner">
+    <a href="{{ routes.root_url }}" class="site-logo" aria-label="{{ shop.name }} home">
+      {%- if section.settings.logo -%}
+        <img
+          src="{{ section.settings.logo | image_url: width: 200 }}"
+          alt="{{ shop.name }}"
+          width="{{ section.settings.logo.width }}"
+          height="{{ section.settings.logo.height }}"
+        >
+      {%- else -%}
+        <span class="site-logo__ink">{{ section.settings.logo_text_start | default: 'fell' }}</span>
+        <span class="site-logo__accent">
+          {{- section.settings.logo_text_end | default: 'o' -}}
+          <span class="site-logo__dot" aria-hidden="true"></span>
+        </span>
+      {%- endif -%}
+    </a>
+
+    <nav class="site-nav" aria-label="Primary">
+      {%- for link in section.settings.main_menu.links -%}
+        <a href="{{ link.url }}" class="site-nav__link{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <div class="header-actions">
+      <div class="site-header__cta">
+        {%- render 'button', label: section.settings.cta_label, url: section.settings.cta_url, size: 'md' -%}
+      </div>
+
+      {%- if section.settings.show_cart_icon -%}
+        <a href="{{ routes.cart_url }}" class="cart-link" aria-label="Cart">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6h15l-1.5 9h-12L6 6Zm0 0L5 3H2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="9" cy="20" r="1.4" fill="currentColor"></circle><circle cx="18" cy="20" r="1.4" fill="currentColor"></circle></svg>
+          <span class="cart-count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
+
+      <button type="button" class="menu-toggle" data-menu-toggle aria-label="Open menu" aria-expanded="false" aria-controls="MobileMenu">
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+        <svg class="icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="mobile-menu" id="MobileMenu" data-mobile-menu>
+    <nav class="mobile-menu__inner" aria-label="Mobile">
+      {%- for link in section.settings.main_menu.links -%}
+        <a href="{{ link.url }}" class="mobile-menu__link{% if link.active %} is-active{% endif %}">{{ link.title }}</a>
+      {%- endfor -%}
+      {%- render 'button', label: section.settings.cta_label, url: section.settings.cta_url, size: 'lg', class: 'btn--full' -%}
+    </nav>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image",
+      "info": "Leave empty to use the text wordmark below."
+    },
+    {
+      "type": "text",
+      "id": "logo_text_start",
+      "label": "Wordmark — first part",
+      "default": "fell"
+    },
+    {
+      "type": "text",
+      "id": "logo_text_end",
+      "label": "Wordmark — accent letter",
+      "default": "o"
+    },
+    {
+      "type": "link_list",
+      "id": "main_menu",
+      "label": "Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Header button label",
+      "default": "Explore Products"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Header button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_icon",
+      "label": "Show cart icon",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

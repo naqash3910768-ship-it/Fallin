@@ -1,0 +1,81 @@
+<section class="section">
+  <div class="container">
+    <h2 style="font-size:1.5rem; font-weight:700; color:var(--color-ink);">{{ section.settings.title }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p style="margin-top:0.5rem; max-width:36rem; color:var(--color-body-text);">{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <div class="grid" style="margin-top:2rem; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign coll = block.settings.collection
+          assign title = block.settings.label | default: coll.title
+        -%}
+        <div style="overflow:hidden; border-radius:0.75rem; border:1px solid rgba(0,0,0,0.06);" {{ block.shopify_attributes }}>
+          <div class="ratio-16-10">
+            {%- render 'image-or-art', image: block.settings.image | default: coll.featured_image, icon: block.settings.icon, tone: block.settings.tone, label: title -%}
+          </div>
+          <div style="padding:1.25rem;">
+            <p style="font-weight:700; color:var(--color-ink);">{{ title }}</p>
+            {%- if coll -%}
+              <p style="margin-top:0.25rem; font-size:0.875rem; color:#737373;">{{ coll.products_count }} products online</p>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category summary grid",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "What's Inside" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "A quick summary of the collections covered in the catalogue — see the full brochure for complete product listings." }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Label override" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Placeholder icon",
+          "default": "chair",
+          "options": [
+            { "value": "chair", "label": "Chair" },
+            { "value": "table", "label": "Table" },
+            { "value": "kids-chair", "label": "Kids chair" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Placeholder tone",
+          "default": "sand",
+          "options": [
+            { "value": "sand", "label": "Sand" },
+            { "value": "ink", "label": "Ink" },
+            { "value": "yellow", "label": "Yellow" }
+          ]
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "category", "settings": { "label": "Chairs", "icon": "chair", "tone": "sand" } },
+      { "type": "category", "settings": { "label": "Tables & Stools", "icon": "table", "tone": "ink" } },
+      { "type": "category", "settings": { "label": "Junior Collection", "icon": "kids-chair", "tone": "yellow" } }
+    ]
+  },
+  "presets": [
+    { "name": "Category summary grid" }
+  ]
+}
+{% endschema %}

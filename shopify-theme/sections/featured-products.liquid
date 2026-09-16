@@ -1,0 +1,46 @@
+<section class="section section--sand">
+  <div class="container">
+    <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start; justify-content:space-between;" class="featured-products__head">
+      {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+      {%- if section.settings.view_all_label != blank and section.settings.collection != blank -%}
+        {%- render 'button', label: section.settings.view_all_label, url: section.settings.collection.url, style: 'ghost' -%}
+      {%- endif -%}
+    </div>
+
+    <div class="product-grid" style="margin-top:3rem;">
+      {%- liquid
+        assign products = section.settings.collection.products
+        assign limit = section.settings.products_to_show
+      -%}
+      {%- for product in products limit: limit -%}
+        <div data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.05 }}s;">
+          {%- render 'product-card', product: product -%}
+        </div>
+      {%- else -%}
+        <div class="product-empty">Select a collection above to feature products here.</div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 640px) {
+    .featured-products__head { flex-direction: row; align-items: flex-end; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Featured products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Best Known" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Featured Collection" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 4, "max": 12, "step": 1, "default": 8 },
+    { "type": "text", "id": "view_all_label", "label": "\"View all\" button label", "default": "View All Products" }
+  ],
+  "presets": [
+    { "name": "Featured products" }
+  ]
+}
+{% endschema %}

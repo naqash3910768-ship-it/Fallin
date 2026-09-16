@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "header": {
+      "type": "page-header",
+      "settings": {
+        "breadcrumb_label": "Brochure",
+        "eyebrow": "Catalogue",
+        "title": "Explore the Fello Collection",
+        "text": "View our complete product catalogue — every chair, table and stool in the current Fello range.",
+        "button_label": "Download Official Brochure",
+        "button_url": "#",
+        "button_external": true,
+        "button_2_label": "Browse Products Online",
+        "button_2_url": "/collections/all",
+        "button_caption": "Opens the official brochure in a new tab.",
+        "icon": "stack",
+        "tone": "ink"
+      }
+    },
+    "inside": {
+      "type": "category-summary-grid",
+      "settings": {
+        "title": "What's Inside",
+        "text": "A quick summary of the collections covered in the catalogue — see the full brochure for complete product listings."
+      }
+    }
+  },
+  "order": ["header", "inside"]
+}

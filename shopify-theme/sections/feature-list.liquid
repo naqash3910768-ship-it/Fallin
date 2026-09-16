@@ -1,0 +1,87 @@
+<section class="section">
+  <div class="container" style="display:grid; gap:3rem; align-items:center;" data-feature-list-grid>
+    <div data-reveal>
+      {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+      <dl class="feature-list">
+        {%- for block in section.blocks -%}
+          <div class="feature-list__item" {{ block.shopify_attributes }}>
+            <dt class="feature-list__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</dt>
+            <dd>
+              <p class="feature-list__title">{{ block.settings.title }}</p>
+              <p class="feature-list__body">{{ block.settings.body }}</p>
+            </dd>
+          </div>
+        {%- endfor -%}
+      </dl>
+    </div>
+    <div class="ratio-4-5" style="position:relative; overflow:hidden; border-radius:1rem; --reveal-delay:0.15s;" data-reveal>
+      {%- render 'image-or-art', image: section.settings.image, icon: section.settings.icon, tone: section.settings.tone, label: section.settings.title -%}
+    </div>
+  </div>
+</section>
+
+<style>
+  @media (min-width: 1024px) {
+    [data-feature-list-grid] { grid-template-columns: repeat(2, 1fr); gap: 4rem; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Feature list",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Standard" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Quality You Can Rely On" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Placeholder icon",
+      "default": "quality",
+      "options": [
+        { "value": "chair", "label": "Chair" },
+        { "value": "factory", "label": "Factory" },
+        { "value": "resin", "label": "Resin" },
+        { "value": "mould", "label": "Mould" },
+        { "value": "quality", "label": "Quality" },
+        { "value": "finish", "label": "Finish" },
+        { "value": "stack", "label": "Stack" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Placeholder tone",
+      "default": "charcoal",
+      "options": [
+        { "value": "sand", "label": "Sand" },
+        { "value": "ink", "label": "Ink" },
+        { "value": "red", "label": "Red" },
+        { "value": "yellow", "label": "Yellow" },
+        { "value": "charcoal", "label": "Charcoal" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Point title" },
+        { "type": "textarea", "id": "body", "label": "Body", "default": "Describe this point." }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "point", "settings": { "title": "Virgin Furniture-Grade Polymer", "body": "Every piece is moulded from 100% virgin furniture-grade polypropylene resin — not recycled or reprocessed plastic." } },
+      { "type": "point", "settings": { "title": "Strict Quality Control", "body": "Each batch runs through Polycraft Industries' quality control process before it is approved for sale." } },
+      { "type": "point", "settings": { "title": "Modern Injection Moulding", "body": "Production runs on large and medium tonnage injection moulding machines across more than ten chair and table moulds." } },
+      { "type": "point", "settings": { "title": "Consistent Finish", "body": "A single-piece moulded shell means no upholstery, joints or fixings to wear loose over time." } }
+    ]
+  },
+  "presets": [
+    { "name": "Feature list" }
+  ]
+}
+{% endschema %}

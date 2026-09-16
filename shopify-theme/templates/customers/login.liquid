@@ -1,0 +1,42 @@
+<div class="container" style="padding-block:4rem; max-width:28rem; margin-inline:auto;">
+  <h1 style="font-size:2rem; font-weight:800; color:var(--color-ink); text-align:center;">Login</h1>
+
+  {%- form 'customer_login' -%}
+    {%- if form.errors -%}
+      <p class="form-error" style="margin-top:1rem;">{{ form.errors | default_errors }}</p>
+    {%- endif -%}
+
+    <div class="form-field" style="margin-top:2rem;">
+      <label for="CustomerEmail">Email</label>
+      <input type="email" id="CustomerEmail" name="customer[email]" autocomplete="email" required>
+    </div>
+
+    {%- if form.password_needed -%}
+      <div class="form-field" style="margin-top:1.25rem;">
+        <label for="CustomerPassword">Password</label>
+        <input type="password" id="CustomerPassword" name="customer[password]" autocomplete="current-password" required>
+      </div>
+    {%- endif -%}
+
+    <button type="submit" class="btn btn--primary btn--lg btn--full" style="margin-top:1.5rem;">Sign In</button>
+
+    <div style="margin-top:1.25rem; display:flex; justify-content:space-between; font-size:0.875rem;">
+      <a href="#" onclick="document.getElementById('RecoverPasswordForm').style.display='block'; return false;">Forgot your password?</a>
+      <a href="{{ routes.account_register_url }}">Create account</a>
+    </div>
+  {%- endform -%}
+
+  <div id="RecoverPasswordForm" style="display:none; margin-top:2rem; border-top:1px solid rgba(0,0,0,0.06); padding-top:2rem;">
+    <h2 style="font-weight:700; color:var(--color-ink);">Reset your password</h2>
+    {%- form 'recover_customer_password' -%}
+      {%- if form.posted_successfully? -%}
+        <p style="margin-top:1rem;">If that email address is in our system, you will receive an email with instructions.</p>
+      {%- endif -%}
+      <div class="form-field" style="margin-top:1rem;">
+        <label for="RecoverEmail">Email</label>
+        <input type="email" id="RecoverEmail" name="email" autocomplete="email" required>
+      </div>
+      <button type="submit" class="btn btn--ghost btn--lg btn--full" style="margin-top:1rem;">Submit</button>
+    {%- endform -%}
+  </div>
+</div>

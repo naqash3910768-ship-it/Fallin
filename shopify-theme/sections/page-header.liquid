@@ -1,0 +1,91 @@
+<div class="container page-header">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><span aria-hidden="true">/</span><span class="breadcrumbs__current" aria-current="page">{{ section.settings.breadcrumb_label | default: page.title }}</span></li>
+    </ol>
+  </nav>
+
+  <div class="page-header__grid{% if section.settings.show_image == false %} page-header--no-media{% endif %}" style="margin-top:2rem;">
+    <div data-reveal>
+      {%- if section.settings.eyebrow != blank -%}<p class="page-header__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      <h1 class="page-header__title">{{ section.settings.title }}</h1>
+      {%- if section.settings.text != blank -%}<p class="page-header__text">{{ section.settings.text }}</p>{%- endif -%}
+      {%- if section.settings.button_label != blank or section.settings.button_2_label != blank -%}
+        <div class="hero__actions">
+          {%- if section.settings.button_label != blank -%}
+            {%- render 'button', label: section.settings.button_label, url: section.settings.button_url, size: 'lg', external: section.settings.button_external -%}
+          {%- endif -%}
+          {%- if section.settings.button_2_label != blank -%}
+            {%- render 'button', label: section.settings.button_2_label, url: section.settings.button_2_url, size: 'lg', style: 'ghost' -%}
+          {%- endif -%}
+        </div>
+        {%- if section.settings.button_caption != blank -%}
+          <p style="margin-top:1rem; font-size:0.75rem; color:#a3a3a3;">{{ section.settings.button_caption }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_image -%}
+      <div class="page-header__media" data-reveal style="--reveal-delay:0.1s;">
+        {%- render 'image-or-art', image: section.settings.image, icon: section.settings.icon, tone: section.settings.tone, label: section.settings.title -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  @media (min-width: 1024px) {
+    .page-header--no-media .page-header__grid { grid-template-columns: 1fr; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Page header",
+  "settings": [
+    { "type": "text", "id": "breadcrumb_label", "label": "Breadcrumb label override" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Page heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "button_label", "label": "Primary button label" },
+    { "type": "url", "id": "button_url", "label": "Primary button link" },
+    { "type": "checkbox", "id": "button_external", "label": "Open primary button link in new tab", "default": false },
+    { "type": "text", "id": "button_2_label", "label": "Secondary button label" },
+    { "type": "url", "id": "button_2_url", "label": "Secondary button link" },
+    { "type": "text", "id": "button_caption", "label": "Small caption under buttons" },
+    { "type": "checkbox", "id": "show_image", "label": "Show image", "default": true },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Placeholder icon",
+      "default": "factory",
+      "options": [
+        { "value": "chair", "label": "Chair" },
+        { "value": "factory", "label": "Factory" },
+        { "value": "resin", "label": "Resin" },
+        { "value": "mould", "label": "Mould" },
+        { "value": "quality", "label": "Quality" },
+        { "value": "finish", "label": "Finish" },
+        { "value": "stack", "label": "Stack" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Placeholder tone",
+      "default": "ink",
+      "options": [
+        { "value": "sand", "label": "Sand" },
+        { "value": "ink", "label": "Ink" },
+        { "value": "red", "label": "Red" },
+        { "value": "yellow", "label": "Yellow" },
+        { "value": "charcoal", "label": "Charcoal" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Page header" }
+  ]
+}
+{% endschema %}

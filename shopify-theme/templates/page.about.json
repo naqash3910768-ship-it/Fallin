@@ -1,0 +1,37 @@
+{
+  "sections": {
+    "header": {
+      "type": "page-header",
+      "settings": {
+        "breadcrumb_label": "About Us",
+        "eyebrow": "Since 1993",
+        "title": "Built on Experience. Designed for Today.",
+        "text": "Polycraft Industries has spent more than three decades manufacturing moulded furniture in Pakistan under the Fello brand — starting with a single chair mould and growing into one of the country's established moulded furniture makers.",
+        "icon": "factory",
+        "tone": "ink"
+      }
+    },
+    "timeline": {
+      "type": "timeline",
+      "settings": {
+        "eyebrow": "Our Story",
+        "title": "From One Mould to a Full Range"
+      }
+    },
+    "material": {
+      "type": "image-text",
+      "settings": {
+        "eyebrow": "Material Philosophy",
+        "title": "Why the Resin Matters",
+        "text": "<p>Fello furniture is made using 100% virgin furniture-grade polypropylene resin.</p><p>Every product passes through strict quality control before it reaches a showroom floor.</p>",
+        "button_label": "Our Quality Standards",
+        "button_url": "/pages/quality",
+        "icon": "resin",
+        "tone": "sand",
+        "media_position": "left",
+        "background": "white"
+      }
+    }
+  },
+  "order": ["header", "timeline", "material"]
+}

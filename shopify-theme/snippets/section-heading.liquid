@@ -1,0 +1,30 @@
+{%- comment -%}
+  Accepts: eyebrow, title, description, align (left|center), tone (dark|light), heading_tag (h1|h2|h3)
+{%- endcomment -%}
+{%- liquid
+  assign align = align | default: 'left'
+  assign tone = tone | default: 'dark'
+  assign heading_tag = heading_tag | default: 'h2'
+  assign wrap_class = 'section-heading'
+  if align == 'center'
+    assign wrap_class = wrap_class | append: ' section-heading--center'
+  endif
+  if tone == 'light'
+    assign wrap_class = wrap_class | append: ' section-heading--light'
+  endif
+-%}
+<div class="{{ wrap_class }}">
+  {%- if eyebrow != blank -%}
+    <p class="section-heading__eyebrow">{{ eyebrow }}</p>
+  {%- endif -%}
+  {%- if heading_tag == 'h1' -%}
+    <h1 class="section-heading__title">{{ title }}</h1>
+  {%- elsif heading_tag == 'h3' -%}
+    <h3 class="section-heading__title">{{ title }}</h3>
+  {%- else -%}
+    <h2 class="section-heading__title">{{ title }}</h2>
+  {%- endif -%}
+  {%- if description != blank -%}
+    <p class="section-heading__description">{{ description }}</p>
+  {%- endif -%}
+</div>

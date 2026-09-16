@@ -1,0 +1,47 @@
+<section class="section section--bordered section--sand">
+  <div class="container">
+    {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+    <div class="pillars-grid">
+      {%- for block in section.blocks -%}
+        <div class="pillar" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.06 }}s;" {{ block.shopify_attributes }}>
+          <span class="pillar__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <div>
+            <p class="pillar__title">{{ block.settings.title }}</p>
+            <p class="pillar__body">{{ block.settings.body }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pillars grid",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Four Pillars" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "What Quality Means at Fello" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Pillar title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "pillar", "settings": { "title": "Virgin Furniture-Grade Polymer", "body": "Every piece is moulded from 100% virgin furniture-grade polypropylene resin — not recycled or reprocessed plastic. This is a deliberate material choice, not a cost-driven one." } },
+      { "type": "pillar", "settings": { "title": "Strict Quality Control", "body": "Each production batch is checked before approval, covering finish, wall thickness and structural integrity across the moulded shell." } },
+      { "type": "pillar", "settings": { "title": "Modern Injection Moulding", "body": "Production runs on large and medium tonnage injection moulding machines across more than ten chair and table moulds, built up gradually since the company's first Taiwanese machine in 1993." } },
+      { "type": "pillar", "settings": { "title": "Consistent Finish", "body": "A single-piece moulded shell has no joints, fixings or upholstery to loosen or wear out over years of daily use." } }
+    ]
+  },
+  "presets": [
+    { "name": "Pillars grid" }
+  ]
+}
+{% endschema %}

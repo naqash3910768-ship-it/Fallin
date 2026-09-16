@@ -1,0 +1,101 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "Fello Moulded Furniture",
+        "title": "Furniture Built for Everyday Life.",
+        "text": "Premium moulded furniture designed with quality, durability and modern living in mind — manufactured in Pakistan by Polycraft Industries since 1993.",
+        "button_label": "Explore Collection",
+        "button_url": "/collections/all",
+        "button_2_label": "Download Brochure",
+        "button_2_url": "/pages/brochure",
+        "icon": "chair",
+        "tone": "sand",
+        "badge_number": "1993",
+        "badge_label": "Manufacturing since"
+      }
+    },
+    "trust_strip": {
+      "type": "trust-strip"
+    },
+    "collections": {
+      "type": "collection-showcase",
+      "settings": {
+        "eyebrow": "The Range",
+        "title": "Explore Our Collections"
+      }
+    },
+    "featured_products": {
+      "type": "featured-products",
+      "settings": {
+        "eyebrow": "Best Known",
+        "title": "Featured Collection",
+        "view_all_label": "View All Products"
+      }
+    },
+    "quality": {
+      "type": "feature-list",
+      "settings": {
+        "eyebrow": "Our Standard",
+        "title": "Quality You Can Rely On",
+        "icon": "quality",
+        "tone": "charcoal"
+      }
+    },
+    "process": {
+      "type": "process-steps",
+      "settings": {
+        "eyebrow": "How It's Made",
+        "title": "From Polymer to Product",
+        "description": "A straightforward manufacturing path Polycraft Industries has refined since 1993."
+      }
+    },
+    "about_teaser": {
+      "type": "image-text",
+      "settings": {
+        "eyebrow": "Since 1993",
+        "title": "Built on Experience. Designed for Today.",
+        "text": "<p>Polycraft Industries was established in 1993 to manufacture large-size injection moulded articles.</p><p>The company began with one chair mould and a 1000-ton injection moulding machine imported from Taiwan.</p><p>Today Polycraft Industries operates more than ten chair and table moulds, supported by several large and medium tonnage injection moulding machines.</p>",
+        "button_label": "Our Story",
+        "button_url": "/pages/about",
+        "icon": "factory",
+        "tone": "sand",
+        "media_position": "left",
+        "background": "white"
+      }
+    },
+    "brochure": {
+      "type": "brochure-cta"
+    },
+    "blog_teaser": {
+      "type": "blog-posts",
+      "settings": {
+        "eyebrow": "From the Journal",
+        "title": "Furniture, Design & Quality",
+        "view_all_label": "Visit the Blog"
+      }
+    },
+    "contact_cta": {
+      "type": "cta-banner",
+      "settings": {
+        "title": "Let's Talk",
+        "text": "Whether you're a homeowner, a retailer or an institutional buyer — we're happy to help you find the right Fello furniture.",
+        "button_label": "Contact Us",
+        "button_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust_strip",
+    "collections",
+    "featured_products",
+    "quality",
+    "process",
+    "about_teaser",
+    "brochure",
+    "blog_teaser",
+    "contact_cta"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-blog",
+      "settings": {
+        "description": "Notes on furniture care, materials and manufacturing."
+      }
+    }
+  },
+  "order": ["main"]
+}

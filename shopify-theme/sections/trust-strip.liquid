@@ -1,0 +1,38 @@
+<section class="trust-strip">
+  <div class="container trust-strip__grid">
+    {%- for block in section.blocks -%}
+      <div {{ block.shopify_attributes }}>
+        <p class="trust-strip__label">{{ block.settings.label }}</p>
+        <p class="trust-strip__detail">{{ block.settings.detail }}</p>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Trust strip",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Established 1993" },
+        { "type": "textarea", "id": "detail", "label": "Detail", "default": "Manufacturing moulded furniture in Pakistan for over three decades." }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "point", "settings": { "label": "Established 1993", "detail": "Manufacturing moulded furniture in Pakistan for over three decades." } },
+      { "type": "point", "settings": { "label": "100% Virgin Polypropylene", "detail": "Furniture-grade resin, not recycled or reprocessed plastic." } },
+      { "type": "point", "settings": { "label": "Strict Quality Control", "detail": "Every batch is checked before it leaves the factory." } },
+      { "type": "point", "settings": { "label": "Built for Everyday Use", "detail": "Designed to withstand daily home, office and outdoor use." } }
+    ]
+  },
+  "presets": [
+    { "name": "Trust strip" }
+  ]
+}
+{% endschema %}

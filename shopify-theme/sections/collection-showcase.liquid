@@ -1,0 +1,101 @@
+<section class="section">
+  <div class="container">
+    {%- render 'section-heading', eyebrow: section.settings.eyebrow, title: section.settings.title -%}
+
+    <div class="collection-rows">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign collection = block.settings.collection
+          assign row_title = block.settings.title | default: collection.title
+          assign row_desc = block.settings.description | default: collection.description | strip_html
+          assign row_url = collection.url | default: block.settings.url
+          assign row_image = block.settings.image | default: collection.featured_image
+          assign row_class = 'collection-row'
+          if forloop.index0 % 2 == 1
+            assign row_class = row_class | append: ' collection-row--reverse'
+          endif
+        -%}
+        <a href="{{ row_url }}" class="{{ row_class }}" data-reveal style="--reveal-delay: {{ forloop.index0 | times: 0.05 }}s;" {{ block.shopify_attributes }}>
+          <div class="collection-row__media">
+            {%- render 'image-or-art', image: row_image, icon: block.settings.icon, tone: block.settings.tone, label: row_title | append: ' — illustrative artwork' -%}
+          </div>
+          <div class="collection-row__content">
+            <p class="collection-row__index">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</p>
+            <h3 class="collection-row__title">{{ row_title }}</h3>
+            {%- if row_desc != blank -%}<p class="collection-row__desc">{{ row_desc }}</p>{%- endif -%}
+            <span class="collection-row__link">
+              {{ block.settings.link_label | default: 'Explore Collection' }}
+              {%- render 'icon-arrow' -%}
+            </span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection showcase",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Range" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Explore Our Collections" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Collection row",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "title", "label": "Title override", "info": "Leave blank to use the collection's title." },
+        { "type": "textarea", "id": "description", "label": "Description override" },
+        { "type": "url", "id": "url", "label": "Link override" },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore Collection" },
+        { "type": "image_picker", "id": "image", "label": "Image override" },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Placeholder icon",
+          "default": "chair",
+          "options": [
+            { "value": "chair", "label": "Chair" },
+            { "value": "armchair", "label": "Armchair" },
+            { "value": "stool", "label": "Stool" },
+            { "value": "table", "label": "Table" },
+            { "value": "kids-chair", "label": "Kids chair" },
+            { "value": "factory", "label": "Factory" },
+            { "value": "resin", "label": "Resin" },
+            { "value": "mould", "label": "Mould" },
+            { "value": "quality", "label": "Quality" },
+            { "value": "finish", "label": "Finish" },
+            { "value": "stack", "label": "Stack" }
+          ]
+        },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Placeholder tone",
+          "default": "sand",
+          "options": [
+            { "value": "sand", "label": "Sand" },
+            { "value": "ink", "label": "Ink" },
+            { "value": "red", "label": "Red" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "charcoal", "label": "Charcoal" }
+          ]
+        }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "row", "settings": { "title": "Chairs", "description": "Designed for comfort, durability and everyday use — for the home, the office and everywhere in between.", "icon": "chair", "tone": "sand" } },
+      { "type": "row", "settings": { "title": "Tables & Stools", "description": "Practical, sturdy tables and stools built on the same moulded quality as the rest of the Fello range.", "icon": "table", "tone": "ink" } },
+      { "type": "row", "settings": { "title": "Junior Collection", "description": "Right-sized moulded furniture for children — light, colourful and durable enough for everyday play.", "icon": "kids-chair", "tone": "yellow" } }
+    ]
+  },
+  "presets": [
+    { "name": "Collection showcase" }
+  ]
+}
+{% endschema %}

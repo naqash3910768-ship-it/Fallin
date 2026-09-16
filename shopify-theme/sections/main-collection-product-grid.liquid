@@ -1,0 +1,86 @@
+<div class="container" style="padding-block:3rem;">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol class="breadcrumbs__list">
+      <li><a href="{{ routes.root_url }}">Home</a></li>
+      <li><span aria-hidden="true">/</span><span class="breadcrumbs__current" aria-current="page">{{ section.settings.heading | default: collection.title }}</span></li>
+    </ol>
+  </nav>
+
+  <h1 style="margin-top:1rem; font-size:2rem; font-weight:800; letter-spacing:-0.02em; color:var(--color-ink);">
+    {{ section.settings.heading | default: collection.title }}
+  </h1>
+  {%- if section.settings.description != blank -%}
+    <p style="margin-top:0.75rem; max-width:36rem; color:var(--color-body-text);">{{ section.settings.description }}</p>
+  {%- endif -%}
+
+  <div style="margin-top:2.5rem;">
+    <div class="product-filter">
+      <nav class="product-filter__tabs" aria-label="Filter by category">
+        <a href="{{ routes.all_products_collection_url }}" class="product-filter__tab{% if collection.handle == 'all' or collection.handle == blank %} is-active{% endif %}">All</a>
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'category_tab' -%}
+            <a
+              href="{{ block.settings.collection.url | default: '#' }}"
+              class="product-filter__tab{% if block.settings.collection.handle == collection.handle %} is-active{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {{ block.settings.label | default: block.settings.collection.title }}
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+
+      <form action="{{ routes.search_url }}" method="get" class="product-filter__search" role="search">
+        <input type="hidden" name="type" value="product">
+        <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.4"></circle><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path></svg>
+        <input type="search" name="q" value="{{ search.terms }}" placeholder="{{ 'general.search.placeholder' | t }}" aria-label="{{ 'general.search.search' | t }}">
+      </form>
+    </div>
+
+    <p class="product-filter__count">{{ collection.products_count }} products</p>
+
+    {%- paginate collection.products by 24 -%}
+      <div class="product-grid" style="margin-top:1.5rem;">
+        {%- for product in collection.products -%}
+          {%- render 'product-card', product: product -%}
+        {%- else -%}
+          <div class="product-empty">No products match your filters right now. Try clearing the search or category.</div>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="pagination" aria-label="Pagination" style="margin-top:2.5rem; display:flex; justify-content:center; gap:0.5rem;">
+          {%- if paginate.previous -%}<a href="{{ paginate.previous.url }}" class="btn btn--ghost btn--md">{{ 'general.pagination.previous' | t }}</a>{%- endif -%}
+          {%- if paginate.next -%}<a href="{{ paginate.next.url }}" class="btn btn--ghost btn--md">{{ 'general.pagination.next' | t }}</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection grid",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading override", "info": "Leave blank to use the collection's title." },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Every chair, table and stool currently in the Fello catalogue. Use the filters below to browse by category or search by name." }
+  ],
+  "blocks": [
+    {
+      "type": "category_tab",
+      "name": "Category tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Tab label" },
+        { "type": "collection", "id": "collection", "label": "Collection" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "category_tab", "settings": { "label": "Chairs" } },
+      { "type": "category_tab", "settings": { "label": "Tables & Stools" } },
+      { "type": "category_tab", "settings": { "label": "Junior Collection" } }
+    ]
+  }
+}
+{% endschema %}

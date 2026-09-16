@@ -1,0 +1,18 @@
+{%- comment -%} Accepts: product {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  "description": {{ product.description | strip_html | json }},
+  "brand": { "@type": "Brand", "name": {{ shop.name | json }} },
+  "url": {{ shop.url | append: product.url | json }},
+  "offers": {
+    "@type": "Offer",
+    "priceCurrency": {{ cart.currency.iso_code | json }},
+    "price": {{ product.selected_or_first_available_variant.price | money_without_currency | json }},
+    "availability": "https://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}"
+  }
+}
+</script>

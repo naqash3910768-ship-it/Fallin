@@ -1,0 +1,37 @@
+<section class="section">
+  <div class="container">
+    <div class="brochure-cta">
+      <div data-reveal>
+        {%- if section.settings.eyebrow != blank -%}<p class="eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+        <h2 class="brochure-cta__title">{{ section.settings.title }}</h2>
+        {%- if section.settings.text != blank -%}<p class="brochure-cta__text">{{ section.settings.text }}</p>{%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <div style="margin-top:2rem;">
+            {%- render 'button', label: section.settings.button_label, url: section.settings.button_url, size: 'lg', external: section.settings.button_external -%}
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="brochure-cta__media" data-reveal style="--reveal-delay:0.1s;">
+        {%- render 'image-or-art', image: section.settings.image, icon: 'stack', tone: 'ink', label: 'Fello product brochure cover', pattern: false -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brochure CTA",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Catalogue" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Explore the Fello Collection" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "View our complete product catalogue — every chair, table and stool in the current Fello range, in one download." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Download Brochure" },
+    { "type": "url", "id": "button_url", "label": "Button link" },
+    { "type": "checkbox", "id": "button_external", "label": "Open link in new tab", "default": false },
+    { "type": "image_picker", "id": "image", "label": "Brochure cover image" }
+  ],
+  "presets": [
+    { "name": "Brochure CTA" }
+  ]
+}
+{% endschema %}

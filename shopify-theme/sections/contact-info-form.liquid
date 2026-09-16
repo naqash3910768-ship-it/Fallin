@@ -1,0 +1,103 @@
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+      <div data-reveal>
+        <div class="contact-tracks">
+          {%- for block in section.blocks -%}
+            <div {{ block.shopify_attributes }}>
+              <p class="contact-track__title">{{ block.settings.title }}</p>
+              <p class="contact-track__body">{{ block.settings.body }}</p>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.show_email -%}
+          <div class="contact-email-block">
+            <p class="contact-email-block__label">Email</p>
+            <a href="mailto:{{ section.settings.email | default: shop.email }}">{{ section.settings.email | default: shop.email }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="contact-form-panel" data-reveal style="--reveal-delay:0.1s;">
+        {%- form 'contact', id: 'ContactForm', class: 'form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="form-success">
+              <p class="form-success__title">{{ 'contact.form.success_title' | t }}</p>
+              <p class="form-success__body">{{ 'contact.form.success_body' | t }}</p>
+            </div>
+          {%- else -%}
+            <div class="form-row">
+              <div class="form-field">
+                <label for="ContactFormName">{{ 'contact.form.name' | t }} <span class="required">*</span></label>
+                <input type="text" id="ContactFormName" name="contact[name]" value="{{ form.name }}" required>
+              </div>
+              <div class="form-field">
+                <label for="ContactFormEmail">{{ 'contact.form.email' | t }} <span class="required">*</span></label>
+                <input type="email" id="ContactFormEmail" name="contact[email]" value="{{ form.email }}" required>
+                {%- if form.errors contains 'email' -%}<p class="form-error">{{ 'contact.form.error_email' | t }}</p>{%- endif -%}
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-field">
+                <label for="ContactFormPhone">{{ 'contact.form.phone' | t }}</label>
+                <input type="tel" id="ContactFormPhone" name="contact[phone]" value="{{ form.phone }}">
+              </div>
+              <div class="form-field">
+                <label for="ContactFormSubject">{{ 'contact.form.subject' | t }}</label>
+                <select id="ContactFormSubject" name="contact[Subject]">
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Product Inquiry">Product Inquiry</option>
+                  <option value="Business / Institutional Inquiry">Business / Institutional Inquiry</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-field">
+              <label for="ContactFormMessage">{{ 'contact.form.message' | t }} <span class="required">*</span></label>
+              <textarea id="ContactFormMessage" name="contact[body]" rows="5" required>{{ form.body }}</textarea>
+              {%- if form.errors contains 'body' -%}<p class="form-error">{{ 'contact.form.error_message' | t }}</p>{%- endif -%}
+            </div>
+
+            {%- if form.errors -%}
+              <p class="form-error">{{ 'contact.form.error' | t }}</p>
+            {%- endif -%}
+
+            <button type="submit" class="btn btn--primary btn--lg btn--full" data-sending-label="{{ 'contact.form.sending' | t }}">
+              <span>{{ 'contact.form.send' | t }}</span>
+            </button>
+          {%- endif -%}
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact info + form",
+  "settings": [
+    { "type": "checkbox", "id": "show_email", "label": "Show email block", "default": true },
+    { "type": "text", "id": "email", "label": "Email override", "info": "Leave blank to use the store's default email." }
+  ],
+  "blocks": [
+    {
+      "type": "track",
+      "name": "Inquiry track",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "General Inquiries" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "default": {
+    "blocks": [
+      { "type": "track", "settings": { "title": "General Inquiries", "body": "Questions about Fello, our products or where to buy them." } },
+      { "type": "track", "settings": { "title": "Product Inquiries", "body": "Ask about a specific chair, table or stool, including colours and availability." } },
+      { "type": "track", "settings": { "title": "Business Inquiries", "body": "Retail, institutional or bulk-order inquiries." } }
+    ]
+  },
+  "presets": [
+    { "name": "Contact info + form" }
+  ]
+}
+{% endschema %}

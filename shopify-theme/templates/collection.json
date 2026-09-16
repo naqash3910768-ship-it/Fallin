@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection-product-grid",
+      "settings": {
+        "description": "Every chair, table and stool currently in the Fello catalogue. Use the filters below to browse by category or search by name."
+      },
+      "blocks": {
+        "chairs": { "type": "category_tab", "settings": { "label": "Chairs" } },
+        "tables": { "type": "category_tab", "settings": { "label": "Tables & Stools" } },
+        "junior": { "type": "category_tab", "settings": { "label": "Junior Collection" } }
+      },
+      "block_order": ["chairs", "tables", "junior"]
+    }
+  },
+  "order": ["main"]
+}

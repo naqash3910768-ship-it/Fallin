@@ -1,0 +1,18 @@
+<div class="container" style="padding-block:4rem;">
+  <a href="{{ routes.account_url }}" style="font-size:0.875rem; color:#737373;">&larr; Back to account</a>
+  <h1 style="margin-top:1rem; font-size:2rem; font-weight:800; color:var(--color-ink);">Addresses</h1>
+
+  <div class="grid" style="margin-top:2rem; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr));">
+    {%- for address in customer.addresses -%}
+      <div style="border:1px solid rgba(0,0,0,0.06); border-radius:0.75rem; padding:1.5rem;">
+        {{ address | format_address }}
+        <div style="margin-top:1rem; display:flex; gap:0.75rem;">
+          <a href="{{ routes.account_addresses_url }}/{{ address.id }}/edit" class="btn btn--ghost btn--md">Edit</a>
+          {%- form 'customer_address', address -%}
+            <button type="submit" name="_method" value="delete" class="btn btn--ghost btn--md" onclick="return confirm('Delete this address?');">Delete</button>
+          {%- endform -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</div>

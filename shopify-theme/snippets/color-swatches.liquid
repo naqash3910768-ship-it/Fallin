@@ -1,0 +1,70 @@
+{%- comment -%}
+  Renders colour swatches for a product's "Color" option, using native
+  Shopify swatch configuration when the merchant has set it up in Admin
+  (Settings > Product options > Color), and falling back to a small
+  built-in colour-name map otherwise so the design still renders correctly
+  out of the box.
+
+  Accepts:
+    product    — product object (required)
+    size       — sm | md (default: sm)
+    show_names — boolean (default: false)
+{%- endcomment -%}
+{%- liquid
+  assign size = size | default: 'sm'
+  assign color_option = null
+  for option in product.options_with_values
+    if option.name == 'Color' or option.name == 'Colour'
+      assign color_option = option
+    endif
+  endfor
+-%}
+{%- if color_option -%}
+  <div class="swatches" aria-label="Available colours: {{ color_option.values | join: ', ' }}">
+    {%- for value in color_option.values -%}
+      {%- liquid
+        assign swatch_hex = value.swatch.color
+        unless swatch_hex
+          assign lower_name = value.downcase
+          case lower_name
+            when 'red'
+              assign swatch_hex = '#c31f26'
+            when 'blue'
+              assign swatch_hex = '#2c5aa0'
+            when 'white'
+              assign swatch_hex = '#f5f2ec'
+            when 'chocolate'
+              assign swatch_hex = '#4a2f22'
+            when 'beige'
+              assign swatch_hex = '#d8c7a8'
+            when 'brown'
+              assign swatch_hex = '#6b3f2a'
+            when 'orange'
+              assign swatch_hex = '#d9691e'
+            when 'grey' or 'gray'
+              assign swatch_hex = '#8a857c'
+            when 'black'
+              assign swatch_hex = '#17140f'
+            when 'yellow'
+              assign swatch_hex = '#f2b705'
+            when 'green'
+              assign swatch_hex = '#3f6b3a'
+            else
+              assign swatch_hex = '#cccccc'
+          endcase
+        endunless
+      -%}
+      <span class="swatch swatch--{{ size }}">
+        <span class="swatch__dot" style="background-color: {{ swatch_hex }};" title="{{ value }}"></span>
+        {%- if show_names -%}<span class="swatch__label">{{ value }}</span>{%- endif -%}
+      </span>
+    {%- endfor -%}
+  </div>
+  {%- if show_names -%}
+    <div class="swatch-names">
+      {%- for value in color_option.values -%}
+        <span class="swatch-name-item">{{ value }}</span>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endif -%}

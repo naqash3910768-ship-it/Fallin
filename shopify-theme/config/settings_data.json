@@ -1,0 +1,40 @@
+{
+  "current": {
+    "color_ink": "#171310",
+    "color_charcoal": "#221d18",
+    "color_red": "#c31f26",
+    "color_red_dark": "#8f1418",
+    "color_yellow": "#f2b705",
+    "color_paper": "#ffffff",
+    "color_sand": "#f5f2ec",
+    "color_sand_dark": "#ece6db",
+    "color_body_text": "#57534e",
+    "type_header_font": "assistant_n7",
+    "type_body_font": "assistant_n4",
+    "use_custom_font": true,
+    "page_width": 1320,
+    "button_radius": 6,
+    "enable_reveal_animations": true,
+    "social_facebook_link": "https://www.facebook.com/fellomouldedfurniture/",
+    "social_instagram_link": "https://www.instagram.com/fello.pk/"
+  },
+  "presets": {
+    "Default": {
+      "color_ink": "#171310",
+      "color_charcoal": "#221d18",
+      "color_red": "#c31f26",
+      "color_red_dark": "#8f1418",
+      "color_yellow": "#f2b705",
+      "color_paper": "#ffffff",
+      "color_sand": "#f5f2ec",
+      "color_sand_dark": "#ece6db",
+      "color_body_text": "#57534e",
+      "type_header_font": "assistant_n7",
+      "type_body_font": "assistant_n4",
+      "use_custom_font": true,
+      "page_width": 1320,
+      "button_radius": 6,
+      "enable_reveal_animations": true
+    }
+  }
+}
