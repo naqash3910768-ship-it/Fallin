@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Art } from "@/components/ui/Art";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function Hero() {
@@ -30,7 +30,14 @@ export function Hero() {
 
         <Reveal delay={0.15} className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl lg:aspect-[5/6]">
-            <Art icon="chair" tone="sand" label="Fello moulded chair — illustrative artwork" className="rounded-2xl" />
+            <Image
+              src="/images/hero.jpg"
+              alt="Fello moulded chairs in orange, black and grey"
+              fill
+              priority
+              sizes="(min-width: 1024px) 40vw, 90vw"
+              className="object-cover"
+            />
           </div>
           <div className="absolute -bottom-5 -left-5 hidden rounded-xl bg-brand-ink px-5 py-4 text-white shadow-xl sm:block">
             <p className="text-2xl font-extrabold leading-none">1993</p>
