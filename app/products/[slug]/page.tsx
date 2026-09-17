@@ -72,7 +72,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
       />
 
       <div className="mt-8 grid gap-12 lg:grid-cols-2 lg:gap-16">
-        <ProductGallery icon={product.icon} name={product.name} />
+        <ProductGallery icon={product.icon} name={product.name} image={product.image} />
 
         <div>
           {category && (

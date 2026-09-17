@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Art, type ArtIcon, type ArtTone } from "@/components/ui/Art";
 
 interface GalleryView {
@@ -8,7 +9,26 @@ interface GalleryView {
   label: string;
 }
 
-export function ProductGallery({ icon, name }: { icon: ArtIcon; name: string }) {
+export function ProductGallery({ icon, name, image }: { icon: ArtIcon; name: string; image?: string }) {
+  if (image) {
+    return (
+      <div className="relative aspect-square overflow-hidden rounded-2xl bg-white">
+        <Image
+          src={image}
+          alt={`Fello ${name} moulded chair`}
+          fill
+          priority
+          sizes="(min-width: 1024px) 40vw, 90vw"
+          className="object-contain p-8"
+        />
+      </div>
+    );
+  }
+
+  return <PlaceholderGallery icon={icon} name={name} />;
+}
+
+function PlaceholderGallery({ icon, name }: { icon: ArtIcon; name: string }) {
   const views: GalleryView[] = [
     { tone: "sand", label: "Front view" },
     { tone: "ink", label: "Detail view" },

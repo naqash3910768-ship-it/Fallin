@@ -60,6 +60,7 @@ export interface Product {
   description: string[];
   icon: ArtIcon;
   tone: ArtTone;
+  image?: string;
   colors?: ColorSwatch[];
   colorSource?: string;
   specifications?: { label: string; value: string }[];
@@ -80,6 +81,7 @@ export const products: Product[] = [
     ],
     icon: "chair",
     tone: "sand",
+    image: "/images/product-premier.jpg",
     featured: true,
   },
   {
@@ -94,6 +96,7 @@ export const products: Product[] = [
     ],
     icon: "chair",
     tone: "sand",
+    image: "/images/product-classic.jpg",
     colors: [
       { name: "Red", hex: "#c31f26" },
       { name: "Blue", hex: "#2c5aa0" },
@@ -165,6 +168,7 @@ export const products: Product[] = [
     ],
     icon: "kids-chair",
     tone: "yellow",
+    image: "/images/product-junior-chair.jpg",
     featured: true,
   },
   {
@@ -188,6 +192,7 @@ export const products: Product[] = [
     ],
     icon: "table",
     tone: "ink",
+    image: "/images/product-folding-table.jpg",
     specifications: [
       { label: "Adjustability", value: "Multiple leg-height settings, as sold with folding chair sets" },
     ],

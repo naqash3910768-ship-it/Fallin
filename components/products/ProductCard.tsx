@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Art } from "@/components/ui/Art";
 import { ColorSwatches } from "@/components/ui/ColorSwatches";
@@ -11,9 +12,19 @@ export function ProductCard({ product }: { product: Product }) {
       href={`/products/${product.slug}`}
       className="group flex flex-col overflow-hidden rounded-xl border border-black/[0.06] bg-white transition-shadow duration-300 hover:shadow-lg hover:shadow-black/5"
     >
-      <div className="relative aspect-square overflow-hidden">
+      <div className="relative aspect-square overflow-hidden bg-white">
         <div className="h-full w-full transition-transform duration-500 group-hover:scale-[1.06]">
-          <Art icon={product.icon} tone={product.tone} label={`${product.name} moulded chair — illustrative artwork`} />
+          {product.image ? (
+            <Image
+              src={product.image}
+              alt={`Fello ${product.name}${product.itemNumber ? ` (${product.itemNumber})` : ""} moulded chair`}
+              fill
+              sizes="(min-width: 1024px) 25vw, 50vw"
+              className="object-contain p-6"
+            />
+          ) : (
+            <Art icon={product.icon} tone={product.tone} label={`${product.name} moulded chair — illustrative artwork`} />
+          )}
         </div>
         {category && (
           <span className="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-brand-ink">
