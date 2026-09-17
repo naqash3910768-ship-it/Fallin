@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Art } from "@/components/ui/Art";
+import { CategoryVisual } from "@/components/ui/CategoryVisual";
 import { Reveal } from "@/components/ui/Reveal";
 import { categories } from "@/lib/products";
 
@@ -21,7 +21,7 @@ export function Collections() {
                 }`}
               >
                 <div className="relative aspect-[16/10] lg:aspect-auto">
-                  <Art icon={cat.icon} tone={cat.tone} label={`${cat.name} — illustrative artwork`} />
+                  <CategoryVisual category={cat} sizes="(min-width: 1024px) 50vw, 100vw" />
                 </div>
                 <div className="flex flex-col justify-center bg-white p-8 lg:p-14">
                   <p className="text-xs font-semibold uppercase tracking-[0.2em] text-brand-red">

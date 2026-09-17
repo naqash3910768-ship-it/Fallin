@@ -9,6 +9,7 @@ export interface Category {
   description: string;
   icon: ArtIcon;
   tone: ArtTone;
+  image?: string;
 }
 
 export const categories: Category[] = [
@@ -19,6 +20,7 @@ export const categories: Category[] = [
     description: "Designed for comfort, durability and everyday use — for the home, the office and everywhere in between.",
     icon: "chair",
     tone: "sand",
+    image: "/images/category-chairs.png",
   },
   {
     slug: "tables-stools",
@@ -27,6 +29,7 @@ export const categories: Category[] = [
     description: "Practical, sturdy tables and stools built on the same moulded quality as the rest of the Fello range.",
     icon: "table",
     tone: "ink",
+    image: "/images/category-tables-stools.jpg",
   },
   {
     slug: "junior",
@@ -34,6 +37,7 @@ export const categories: Category[] = [
     short: "Junior",
     description: "Right-sized moulded furniture for children — light, colourful and durable enough for everyday play.",
     icon: "kids-chair",
+    image: "/images/category-junior.jpg",
     tone: "yellow",
   },
 ];

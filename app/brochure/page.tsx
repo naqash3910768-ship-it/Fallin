@@ -3,6 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
 import { Art } from "@/components/ui/Art";
+import { CategoryVisual } from "@/components/ui/CategoryVisual";
 import { Reveal } from "@/components/ui/Reveal";
 import { categories, products } from "@/lib/products";
 import { siteConfig } from "@/lib/site-config";
@@ -57,8 +58,8 @@ export default function BrochurePage() {
             const count = products.filter((p) => p.category === cat.slug).length;
             return (
               <div key={cat.slug} className="overflow-hidden rounded-xl border border-black/[0.06]">
-                <div className="aspect-[16/10]">
-                  <Art icon={cat.icon} tone={cat.tone} label={cat.name} />
+                <div className="relative aspect-[16/10]">
+                  <CategoryVisual category={cat} sizes="33vw" />
                 </div>
                 <div className="p-5">
                   <p className="font-bold text-brand-ink">{cat.name}</p>
