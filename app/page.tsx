@@ -6,7 +6,6 @@ import { QualitySection } from "@/components/home/QualitySection";
 import { ManufacturingStory } from "@/components/home/ManufacturingStory";
 import { AboutTeaser } from "@/components/home/AboutTeaser";
 import { BrochureCTA } from "@/components/home/BrochureCTA";
-import { BlogTeaser } from "@/components/home/BlogTeaser";
 import { ContactCTA } from "@/components/home/ContactCTA";
 
 export default function Home() {
@@ -20,7 +19,6 @@ export default function Home() {
       <ManufacturingStory />
       <AboutTeaser />
       <BrochureCTA />
-      <BlogTeaser />
       <ContactCTA />
     </>
   );
