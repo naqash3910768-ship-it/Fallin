@@ -32,7 +32,7 @@ export function Footer() {
     <footer className="bg-brand-ink text-white">
       <Container className="grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Logo light className="text-2xl" />
+          <Logo className="h-12" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
             Fello Moulded Furniture is manufactured by Polycraft Industries, using 100% virgin
             furniture-grade polypropylene resin since 1993.
