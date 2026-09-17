@@ -123,6 +123,7 @@ export const products: Product[] = [
     ],
     icon: "chair",
     tone: "sand",
+    image: "/images/product-restita.jpg",
     colors: [
       { name: "Red", hex: "#c31f26" },
       { name: "Orange", hex: "#d9691e" },
