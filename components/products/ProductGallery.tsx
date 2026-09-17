@@ -19,7 +19,7 @@ export function ProductGallery({ icon, name, image }: { icon: ArtIcon; name: str
           fill
           priority
           sizes="(min-width: 1024px) 40vw, 90vw"
-          className="object-contain p-8"
+          className="object-contain p-4"
         />
       </div>
     );

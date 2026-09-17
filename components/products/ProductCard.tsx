@@ -20,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
               alt={`Fello ${product.name}${product.itemNumber ? ` (${product.itemNumber})` : ""} moulded chair`}
               fill
               sizes="(min-width: 1024px) 25vw, 50vw"
-              className="object-contain p-6"
+              className="object-contain p-3"
             />
           ) : (
             <Art icon={product.icon} tone={product.tone} label={`${product.name} moulded chair — illustrative artwork`} />
