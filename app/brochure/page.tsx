@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Button } from "@/components/ui/Button";
-import { Art } from "@/components/ui/Art";
 import { CategoryVisual } from "@/components/ui/CategoryVisual";
 import { Reveal } from "@/components/ui/Reveal";
 import { categories, products } from "@/lib/products";
@@ -43,7 +43,13 @@ export default function BrochurePage() {
         </Reveal>
 
         <Reveal delay={0.1} className="relative mx-auto aspect-[3/4] w-full max-w-sm overflow-hidden rounded-xl shadow-2xl shadow-black/10">
-          <Art icon="stack" tone="ink" pattern={false} label="Fello product brochure cover — illustrative artwork" />
+          <Image
+            src="/images/brochure-collection.jpg"
+            alt="The Fello chair collection"
+            fill
+            sizes="24rem"
+            className="object-cover"
+          />
         </Reveal>
       </div>
 

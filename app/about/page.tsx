@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -40,7 +41,13 @@ export default function AboutPage() {
             </p>
           </Reveal>
           <Reveal delay={0.1} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-            <Art icon="factory" tone="ink" label="Polycraft Industries factory — illustrative artwork" />
+            <Image
+              src="/images/about-factory.jpg"
+              alt="Injection moulding machine and finished Fello chair on the Polycraft Industries factory floor"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </Reveal>
         </div>
       </Container>

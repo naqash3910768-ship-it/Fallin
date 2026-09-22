@@ -1,13 +1,13 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Art, type ArtIcon } from "@/components/ui/Art";
 import { Reveal } from "@/components/ui/Reveal";
 
-const steps: { title: string; body: string; icon: ArtIcon }[] = [
-  { title: "Raw Material", body: "100% virgin furniture-grade polypropylene resin, sourced ahead of every production run.", icon: "resin" },
-  { title: "Injection Moulding", body: "Resin is shaped under heat and pressure across Polycraft's chair and table moulds.", icon: "mould" },
-  { title: "Quality Control", body: "Each piece is checked for finish and structural integrity before approval.", icon: "quality" },
-  { title: "Finished Furniture", body: "Ready to stack, ship and use — in homes, offices and institutions across Pakistan.", icon: "stack" },
+const steps: { title: string; body: string; image: string }[] = [
+  { title: "Raw Material", body: "100% virgin furniture-grade polypropylene resin, sourced ahead of every production run.", image: "/images/icon-raw-material.png" },
+  { title: "Injection Moulding", body: "Resin is shaped under heat and pressure across Polycraft's chair and table moulds.", image: "/images/icon-injection-moulding.png" },
+  { title: "Quality Control", body: "Each piece is checked for finish and structural integrity before approval.", image: "/images/icon-quality-control.png" },
+  { title: "Finished Furniture", body: "Ready to stack, ship and use — in homes, offices and institutions across Pakistan.", image: "/images/icon-finished-furniture.png" },
 ];
 
 export function ManufacturingStory() {
@@ -25,8 +25,14 @@ export function ManufacturingStory() {
           {steps.map((step, i) => (
             <Reveal key={step.title} delay={i * 0.08}>
               <div className="relative">
-                <div className="aspect-square overflow-hidden rounded-xl">
-                  <Art icon={step.icon} tone="charcoal" label={`${step.title} — illustrative artwork`} />
+                <div className="relative aspect-square overflow-hidden rounded-xl">
+                  <Image
+                    src={step.image}
+                    alt={`${step.title} — manufacturing step icon`}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
                 <p className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-yellow">
                   Step {i + 1}

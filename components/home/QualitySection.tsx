@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Art } from "@/components/ui/Art";
 import { Reveal } from "@/components/ui/Reveal";
 
 const points = [
@@ -29,7 +29,13 @@ export function QualitySection() {
           </dl>
         </Reveal>
         <Reveal delay={0.15} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-          <Art icon="quality" tone="charcoal" label="Fello quality control — illustrative artwork" />
+          <Image
+            src="/images/quality-shield.jpg"
+            alt="Quality assurance and reliability"
+            fill
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
         </Reveal>
       </Container>
     </section>

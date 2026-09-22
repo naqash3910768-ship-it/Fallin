@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { Art } from "@/components/ui/Art";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function BrochureCTA() {
@@ -21,7 +21,13 @@ export function BrochureCTA() {
           </Button>
         </Reveal>
         <Reveal delay={0.1} className="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden rounded-xl shadow-2xl shadow-black/10 lg:max-w-sm">
-          <Art icon="stack" tone="ink" pattern={false} label="Fello product brochure cover — illustrative artwork" />
+          <Image
+            src="/images/brochure-collection.jpg"
+            alt="The Fello chair collection"
+            fill
+            sizes="(min-width: 1024px) 24rem, 20rem"
+            className="object-cover"
+          />
         </Reveal>
       </Container>
     </section>

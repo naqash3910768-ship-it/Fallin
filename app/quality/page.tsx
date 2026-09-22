@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { Art } from "@/components/ui/Art";
 import { Reveal } from "@/components/ui/Reveal";
 import { ManufacturingStory } from "@/components/home/ManufacturingStory";
 import { companyFacts } from "@/lib/site-config";
@@ -34,7 +34,13 @@ export default function QualityPage() {
             <p className="mt-6 text-lg leading-relaxed text-neutral-600">{companyFacts.founded}</p>
           </Reveal>
           <Reveal delay={0.1} className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-            <Art icon="quality" tone="charcoal" label="Fello quality control — illustrative artwork" />
+            <Image
+              src="/images/quality-shield.jpg"
+              alt="Quality assurance and reliability"
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
           </Reveal>
         </div>
       </Container>
