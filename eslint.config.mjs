@@ -12,8 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Separate Next.js project with its own tooling.
-    "travelmate/**",
   ]),
 ]);
 
